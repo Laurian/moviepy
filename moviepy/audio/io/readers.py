@@ -155,7 +155,7 @@ class FFMPEG_AudioReader:
             del self.proc
 
     def get_frame(self, tt):
-
+        tt.clip(0, self.duration - 1.0 / self.fps, tt)
         buffersize = self.buffersize
         if isinstance(tt,np.ndarray):
             # lazy implementation, but should not cause problems in
@@ -238,6 +238,3 @@ class FFMPEG_AudioReader:
 
     def __del__(self):
         self.close_proc()
-
-
-
